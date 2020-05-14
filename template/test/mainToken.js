@@ -5,16 +5,16 @@ require('chai')
     .use(require('chai-as-promised'))
     .should();
 
-const { revert, snapshot } = require('sc-library/test-utils/evmMethods');
-const { estimateConstructGas } = require('sc-library/test-utils/web3Utils');
+const { revert, snapshot } = require('./sc-library/test-utils/evmMethods');
+const { estimateConstructGas } = require('./sc-library/test-utils/web3Utils');
 
 const Token = artifacts.require('./MainToken.sol');
 //#if !defined(D_ONLY_TOKEN) || !D_ONLY_TOKEN
 const Crowdsale = artifacts.require('./TemplateCrowdsale.sol');
 //#endif
-const SuccessfulERC223Receiver = artifacts.require('./SuccessfulERC223Receiver.sol');
-const FailingERC223Receiver = artifacts.require('./FailingERC223Receiver.sol');
-const ERC223ReceiverWithoutTokenFallback = artifacts.require('./ERC223ReceiverWithoutTokenFallback.sol');
+const SuccessfulDRC223Receiver = artifacts.require('./SuccessfulDRC223Receiver.sol');
+const FailingDRC223Receiver = artifacts.require('./FailingDRC223Receiver.sol');
+const DRC223ReceiverWithoutTokenFallback = artifacts.require('./DRC223ReceiverWithoutTokenFallback.sol');
 
 //#if D_PREMINT_COUNT > 0
 const extractBigNumber = (string) => new BigNumber(string.match(/\((\d+)\)/)[1]);
@@ -96,9 +96,9 @@ contract('Token', accounts => {
     });
 
     //#if "D_ERC" == 23
-    it('#5 erc223 transfer to contract', async () => {
+    it('#5 DRC223 transfer to contract', async () => {
         const token = await Token.new();
-        const receiver = await SuccessfulERC223Receiver.new();
+        const receiver = await SuccessfulDRC223Receiver.new();
 
         const tokensToTransfer = web3.toWei(1, 'ether');
         await token.mint(BUYER_1, tokensToTransfer, { from: TOKEN_OWNER });
@@ -109,9 +109,9 @@ contract('Token', accounts => {
         balance.should.bignumber.be.equals(tokensToTransfer);
     });
 
-    it('#6 erc223 transfer should fail on contract receiver with failing tokenFallback function', async () => {
+    it('#6 DRC223 transfer should fail on contract receiver with failing tokenFallback function', async () => {
         const token = await Token.new();
-        const failingReceiver = await FailingERC223Receiver.new();
+        const failingReceiver = await FailingDRC223Receiver.new();
 
         const tokensToTransfer = web3.toWei(1, 'wei');
         await token.mint(BUYER_1, tokensToTransfer, { from: TOKEN_OWNER });
@@ -122,9 +122,9 @@ contract('Token', accounts => {
         await token.balanceOf(failingReceiver.address).should.eventually.be.zero;
     });
 
-    it('#7 erc223 transfer should fail on contract without tokenFallback function', async () => {
+    it('#7 DRC223 transfer should fail on contract without tokenFallback function', async () => {
         const token = await Token.new();
-        const failingReceiver = await ERC223ReceiverWithoutTokenFallback.new();
+        const failingReceiver = await DRC223ReceiverWithoutTokenFallback.new();
 
         const tokensToTransfer = web3.toWei(1, 'wei');
         await token.mint(BUYER_1, tokensToTransfer, { from: TOKEN_OWNER });

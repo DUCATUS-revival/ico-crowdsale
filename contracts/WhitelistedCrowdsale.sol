@@ -1,7 +1,7 @@
 pragma solidity ^0.4.23;
 
-import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "./openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
+import "./openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 
 contract WhitelistedCrowdsale is Crowdsale, Ownable {

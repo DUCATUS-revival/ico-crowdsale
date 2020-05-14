@@ -1,6 +1,6 @@
 pragma solidity ^0.4.23;
 
-import "openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
+import "./openzeppelin-solidity/contracts/token/DRC20/MintableToken.sol";
 import "./FreezableToken.sol";
 
 

@@ -1,6 +1,6 @@
 pragma solidity ^0.4.23;
 
-import "openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
+import "./openzeppelin-solidity/contracts/token/DRC20/StandardToken.sol";
 
 
 contract FreezableToken is StandardToken {

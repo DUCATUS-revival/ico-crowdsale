@@ -1,11 +1,11 @@
 pragma solidity ^0.4.23;
 
 //#if D_SOFT_CAP_WEI != 0
-import "openzeppelin-solidity/contracts/crowdsale/distribution/RefundableCrowdsale.sol";
+import "./openzeppelin-solidity/contracts/crowdsale/distribution/RefundableCrowdsale.sol";
 //#endif
 import "./MainCrowdsale.sol";
 //#if D_AUTO_FINALISE
-import "sc-library/contracts/Checkable.sol";
+import "./sc-library/contracts/Checkable.sol";
 //#endif
 //#if D_BONUS_TOKENS
 import "./BonusableCrowdsale.sol";

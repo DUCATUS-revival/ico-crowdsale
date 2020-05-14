@@ -1,7 +1,7 @@
 {
   "constants": {
     "D_ONLY_TOKEN": true,
-    "D_ERC": "ERC20",
+    "D_ERC": "DRC20",
     "D_NAME": "MyWish Token",
     "D_SYMBOL": "WISH",
     "D_DECIMALS": 10,
